@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "555810550439",
+    "firebase_url": "https://jumpcontatcts.firebaseio.com",
+    "project_id": "jumpcontatcts",
+    "storage_bucket": "jumpcontatcts.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555810550439:android:aeae8abe298ab215",
+        "android_client_info": {
+          "package_name": "com.example.jayesh.jumpcontatcts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555810550439-7kahcn30ldsbrf6i19ruf59b2n2umivc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jayesh.jumpcontatcts",
+            "certificate_hash": "fe9240910073474a83e03e5f21be31db619af0df"
+          }
+        },
+        {
+          "client_id": "555810550439-bu9taeapq3goiaelp7mg57vq8h01neid.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiaIjLgex6UCrzPPmr3lEsznAQ5EnF6DY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "555810550439-bu9taeapq3goiaelp7mg57vq8h01neid.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
