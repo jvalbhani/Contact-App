@@ -150,16 +150,25 @@ public class viewContacts extends AppCompatActivity {
                                 update.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        DocumentReference userId = mFirestore.collection(getIntent().getStringExtra("UserId")).document(dShot.getId());
-                                        userId.update("name", name.getText().toString());
-                                        userId.update("contactNo", contactNo.getText().toString());
-                                       if(lat != 0.00 || lon != 0.00) {
-                                           userId.update("latitude", lat);
-                                           userId.update("longitude", lon);
-                                       }
-                                        Toast.makeText(getApplicationContext(), "Contact Updated succesfully", Toast.LENGTH_SHORT).show();
-                                        d.dismiss();
-                                        recreate();
+
+                                        if(name.getText().toString().trim().equals("") && contactNo.getText().toString().trim().equals(""))
+                                        {
+                                            name.setError("atleast 1 required");
+                                            contactNo.setError("atleast 1 required");
+                                        }
+                                        else {
+
+                                            DocumentReference userId = mFirestore.collection(getIntent().getStringExtra("UserId")).document(dShot.getId());
+                                            userId.update("name", name.getText().toString());
+                                            userId.update("contactNo", contactNo.getText().toString());
+                                            if (lat != 0.00 || lon != 0.00) {
+                                                userId.update("latitude", lat);
+                                                userId.update("longitude", lon);
+                                            }
+                                            Toast.makeText(getApplicationContext(), "Contact Updated succesfully", Toast.LENGTH_SHORT).show();
+                                            d.dismiss();
+                                            recreate();
+                                        }
                                     }
                                 });
                             }
@@ -201,11 +210,18 @@ public class viewContacts extends AppCompatActivity {
 
                         EditText name = (EditText) d.findViewById(R.id.contactName);
                         EditText contactNo = (EditText) d.findViewById(R.id.contactNo);
-                        mFirestore.collection(getIntent().getStringExtra("UserId")).add(new Contacts(contactNo.getText().toString(), name.getText().toString(), lat, lon));
-                        Toast.makeText(getApplicationContext(), "Contact added succesfully", Toast.LENGTH_SHORT).show();
-                        d.dismiss();
-                        recreate();
+                        if(name.getText().toString().trim().equals("") && contactNo.getText().toString().trim().equals(""))
+                        {
+                            name.setError("atleast 1 required");
+                            contactNo.setError("atleast 1 required");
+                        }
+                        else {
+                            mFirestore.collection(getIntent().getStringExtra("UserId")).add(new Contacts(contactNo.getText().toString(), name.getText().toString(), lat, lon));
+                            Toast.makeText(getApplicationContext(), "Contact added succesfully", Toast.LENGTH_SHORT).show();
+                            d.dismiss();
 
+                            recreate();
+                        }
                     }
                 });
                 ((Button) d.findViewById(R.id.pickLocation)).setOnClickListener(new View.OnClickListener() {

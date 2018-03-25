@@ -35,15 +35,15 @@ public class MainActivity extends AppCompatActivity {
 
     private GoogleSignInClient mGoogleSignInClient;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(FirebaseAuth.getInstance().getCurrentUser()!=null)
+        if(FirebaseAuth.getInstance().getCurrentUser()!=null && (FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()))
         {
             startActivity(new Intent(getApplicationContext(), viewContacts.class).putExtra("UserName", FirebaseAuth.getInstance().getCurrentUser().getEmail()).putExtra("UserId",FirebaseAuth.getInstance().getCurrentUser().getUid()));
+            finish();
         }
         else {
             Button singUp = (Button) findViewById(R.id.SignUp);
@@ -73,7 +73,10 @@ public class MainActivity extends AppCompatActivity {
                                 if (authResultTask.isSuccessful()) {
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     if (user.isEmailVerified())
+                                    {
                                         startActivity(new Intent(getApplicationContext(), viewContacts.class).putExtra("UserName", user.getEmail()).putExtra("UserId",mAuth.getCurrentUser().getUid()));
+                                        finish();
+                                    }
                                     else
                                         Toast.makeText(getApplicationContext(), "Please verify your email", Toast.LENGTH_SHORT).show();
                                 }
@@ -164,7 +167,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            startActivity(new Intent(getApplicationContext(), viewContacts.class).putExtra("UserName", mAuth.getCurrentUser().getEmail()).putExtra("UserId",mAuth.getCurrentUser().getUid()));
+                            {
+                                startActivity(new Intent(getApplicationContext(), viewContacts.class).putExtra("UserName", mAuth.getCurrentUser().getEmail()).putExtra("UserId",mAuth.getCurrentUser().getUid()));
+                                finish();
+                            }
                         } else
                             Toast.makeText(getApplicationContext(), "sign In With Credential failure", Toast.LENGTH_SHORT).show();
                     }
